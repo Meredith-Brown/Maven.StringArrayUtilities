@@ -1,5 +1,7 @@
 package com.zipcodewilmington;
 
+import com.sun.xml.internal.ws.addressing.model.ActionNotSupportedException;
+
 import java.util.*;
 
 /**
@@ -145,7 +147,7 @@ public class StringArrayUtils {
             }
         }
         int size = newArrayList.size();
-        String[] newArray = newArrayList.toArray(new String[0]); // size or 0???
+        String[] newArray = newArrayList.toArray(new String[0]);
         return newArray;
     }
 
@@ -154,7 +156,20 @@ public class StringArrayUtils {
      * @return array of Strings with each consecutive duplicate occurrence concatenated as a single string in an array of Strings
      */ // TODO
     public static String[] packConsecutiveDuplicates(String[] array) {
-        return null;
+        List<String> newArrayList = new ArrayList<>(Arrays.asList(array));
+        List<String> copiedArrayList = new ArrayList<>(newArrayList);
+        int copyCount = copiedArrayList.size() - 1;
+        for (int i = newArrayList.size()-2; i >= 0; i--) {
+            if (Objects.equals(newArrayList.get(i), copiedArrayList.get(copyCount))) {
+                newArrayList.set(i + 1, newArrayList.get(i) + newArrayList.get(i +1));
+                newArrayList.remove(i);
+                copyCount -= 1;
+            } else {
+             copyCount -= 1;
+            }
+        }
+        String[] outputArray = newArrayList.toArray(new String[0]);
+        return outputArray;
     }
 
 
