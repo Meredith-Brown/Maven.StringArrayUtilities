@@ -1,5 +1,7 @@
 package com.zipcodewilmington;
 
+import java.util.*;
+
 /**
  * Created by leon on 1/29/18.
  */
@@ -25,7 +27,8 @@ public class StringArrayUtils {
      * @return last element in specified array
      */ // TODO
     public static String getLastElement(String[] array) {
-        return null;
+        int length = array.length;
+        return array[length-1];
     }
 
     /**
@@ -33,7 +36,8 @@ public class StringArrayUtils {
      * @return second to last element in specified array
      */ // TODO
     public static String getSecondToLastElement(String[] array) {
-        return null;
+        int length = array.length;
+        return array[length-2];
     }
 
     /**
@@ -42,15 +46,22 @@ public class StringArrayUtils {
      * @return true if the array contains the specified `value`
      */ // TODO
     public static boolean contains(String[] array, String value) {
-        return false;
+        List<String> stringArrayList = new ArrayList<>(Arrays.asList(array)); // https://stackabuse.com/java-check-if-array-contains-value-or-element/
+        return stringArrayList.contains(value);
     }
 
     /**
      * @param array of String objects
      * @return an array with identical contents in reverse order
      */ // TODO
-    public static String[] reverse(String[] array) {
-        return null;
+    public static String[] reverse(String[] array) { // [1 2 3 4 5]
+        for (int i = 0; i < array.length/2; i++) {
+            String temporary = array[i]; // 1st iteration: temporary variable is assigned 1
+            array[i] = array[array.length - i - 1]; // 1st iteration: the slot that held 1 is now assigned 5
+            array[array.length - i - 1] = temporary; // 1st iteration: the slot that held 5 is now assigned 1
+        }
+        // https://www.youtube.com/watch?v=77N5qsea8qQ&list=PLmpmyPywZ443dRtMleUPoNp2OyiNE45O6&index=29
+        return array;
     }
 
     /**
@@ -58,7 +69,15 @@ public class StringArrayUtils {
      * @return true if the order of the array is the same backwards and forwards
      */ // TODO
     public static boolean isPalindromic(String[] array) {
-        return false;
+        int trueFalse = 0;
+        for (int i = 0; i <= array.length/2 + 1; i++) {
+            if (Objects.equals(array[i], array[array.length - 1 - i])) {
+
+            } else {
+                trueFalse = 1;
+            }
+        }
+        return (trueFalse == 0);
     }
 
     /**
