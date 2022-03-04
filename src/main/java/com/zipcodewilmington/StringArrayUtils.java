@@ -85,7 +85,12 @@ public class StringArrayUtils {
      * @return true if each letter in the alphabet has been used in the array
      */ // TODO
     public static boolean isPangramic(String[] array) {
-        return false;
+        String arrayAsString = Arrays.toString(array); // convert array to string
+        String lowerCase = arrayAsString.toLowerCase(); // convert string to lower case
+        int count = (int) lowerCase.chars().filter(i -> i >= 'a' && i <= 'z').distinct().count(); // count distinct letters in a string
+// https://www.tutorialspoint.com/how-to-find-if-a-given-string-contains-only-letters-in-java
+// https://stackoverflow.com/questions/39263751/how-to-check-if-a-string-contains-all-the-letters-of-the-alphabet
+        return (count == 26);
     }
 
     /**
@@ -94,7 +99,13 @@ public class StringArrayUtils {
      * @return number of occurrences the specified `value` has occurred
      */ // TODO
     public static int getNumberOfOccurrences(String[] array, String value) {
-        return 0;
+        int count = 0;
+        for (int i = 0; i <= array.length - 1; i++) {
+            if (array[i].equals(value)) {
+                count += 1;
+            }
+        }
+        return count;
     }
 
     /**
