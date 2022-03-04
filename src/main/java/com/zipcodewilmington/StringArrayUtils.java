@@ -114,7 +114,22 @@ public class StringArrayUtils {
      * @return array with identical contents excluding values of `value`
      */ // TODO
     public static String[] removeValue(String[] array, String valueToRemove) {
-        return null;
+        int count = 0;
+        for (int i = 0; i <= array.length - 1; i++) {
+            if (array[i].equals(valueToRemove)) {
+                count += 1;
+            }
+        }
+        String[] newArray = new String[array.length - count];
+        for (int index1 = 0, index2 = 0; index1 < array.length; index1++) {
+            if (Objects.equals(array[index1], valueToRemove)) {
+            } else {
+                newArray[index2] = array[index1];
+                index2++;
+            }
+        }
+        // https://stackabuse.com/remove-element-from-an-array-in-java/
+        return newArray;
     }
 
     /**
@@ -122,7 +137,16 @@ public class StringArrayUtils {
      * @return array of Strings with consecutive duplicates removes
      */ // TODO
     public static String[] removeConsecutiveDuplicates(String[] array) {
-        return null;
+        List<String> newArrayList = new ArrayList<>(Arrays.asList(array));
+        for (int i = 1; i < newArrayList.size(); i++) {
+            if (newArrayList.get(i) == newArrayList.get(i-1)) { // use .get -> https://stackoverflow.com/questions/23535346/comparing-elements-in-the-same-list-java
+                newArrayList.remove(i);
+                i--;
+            }
+        }
+        int size = newArrayList.size();
+        String[] newArray = newArrayList.toArray(new String[0]); // size or 0???
+        return newArray;
     }
 
     /**
